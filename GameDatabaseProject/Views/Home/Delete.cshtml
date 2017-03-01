@@ -1,0 +1,101 @@
+﻿@model GameDatabaseProject.Games
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="standard-height">
+
+	<h2>Administrační rozhraní <span class="bold">Pushstart.cz</span></h2>
+
+
+	<div>
+		<h4><span class="glyphicon glyphicon-trash"></span>  Smazat herní položku</h4>
+		<hr />
+		<dl class="dl-horizontal">
+			<dt>
+				@Html.DisplayName("Název")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Name)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Obrázek")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Picture)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Rok vzniku")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Year)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Počet hodnocení")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.RankCount)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Průměrné hodnocení")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.RankOveral)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Žánr")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Genre.Name)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Distributor")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Distributors.Name)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Výrobce")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Creators.Name)
+			</dd>
+
+			<dt>
+				@Html.DisplayName("Platforma")
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Device.Name)
+			</dd>
+
+		</dl>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-actions no-color">
+				@Html.ActionLink("Zpět na Admin", "Index") |
+				<input type="submit" value="Smazat hru" class="btn btn-default" />
+			</div>
+		}
+	</div>
+</div>

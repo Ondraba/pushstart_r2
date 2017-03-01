@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GameDatabaseProject.AspNetUsers>
+
+<div class="standard-height">
+
+	<div class="user-list-packet">
+		
+		<table class="table table-striped">
+			<tr>
+				<th>
+					<span class="glyphicon glyphicon-user"></span>
+					@Html.DisplayName("Uživatel")
+				</th>
+				<th>
+					@Html.DisplayName("Body")
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+
+					<td>
+						@Html.DisplayFor(modelItem => item.NickName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Points)
+					</td>
+					@*<td>
+							@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+							@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+							@Html.ActionLink("Delete", "Delete", new { id=item.Id })
+						</td>*@
+				</tr>
+			}
+
+		</table>
+
+	</div>
+</div>
+

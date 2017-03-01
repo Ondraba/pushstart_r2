@@ -1,0 +1,46 @@
+﻿@model GameDatabaseProject.Reviews
+
+@{
+    ViewBag.Title = "MyDeleteReview";
+}
+
+<div class="standard-height">
+	<div class="container">
+
+
+		<div class="delete-packet">
+
+			<div class="col-md-4">
+			</div>
+
+			<div class="col-md-4">
+				<div class="row">
+					<h4>Smazat komentář ke hře <span class="delete-game-name">@Html.DisplayFor(model => model.Games.Name)</span>?</h4>
+				</div>
+
+				<div class="row">
+					@using (Html.BeginForm())
+					{
+						@Html.AntiForgeryToken()
+
+						<div class="form-actions no-color delete-button-user">
+							<input type="submit" value="Smazat" class="btn btn-default" />
+						</div>
+					}
+
+				</div>
+			</div>
+
+			<div class="col-md-4">
+			</div>
+
+		</div>
+
+
+
+
+
+	</div>
+
+</div>
+

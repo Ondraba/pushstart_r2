@@ -1,0 +1,99 @@
+﻿
+@model IEnumerable<GameDatabaseProject.Games>	
+
+
+<div class="standard-height">
+	<div class="all-games-packet">
+
+		@using (Html.BeginForm("SortAllGames", "User"))
+		{
+
+
+			<div class="form-group">
+				@Html.DropDownList("genreDrop", (IEnumerable<SelectListItem>)ViewBag.listGenres, "-- Žánr --", htmlAttributes: new { @class = "form-control" })
+
+			</div>
+
+
+			<div class="form-group">
+				@Html.DropDownList("distributorDrop", (IEnumerable<SelectListItem>)ViewBag.listDistributors, "-- Distributor --", htmlAttributes: new { @class = "form-control" })
+			</div>
+
+				<div class="form-group">
+					@Html.DropDownList("creatorDrop", (IEnumerable<SelectListItem>)ViewBag.listCreators, "-- Výrobce --", htmlAttributes: new { @class = "form-control" })
+				</div>
+
+				<div class="form-group">
+					@Html.DropDownList("deviceDrop", (IEnumerable<SelectListItem>)ViewBag.listDevices, "-- Zařízení --", htmlAttributes: new { @class = "form-control" })
+				</div>
+
+				<button type="submit" name="SortAllGames"><span class="glyphicon glyphicon-search"></span></button>
+
+		}
+		<table class="table table-striped">
+
+			<tr>
+
+				<th>
+					@Html.DisplayName("Název hry")
+				</th>
+				<th>
+					@Html.DisplayName("Rok vzniku")
+				</th>
+				<th>
+					@Html.DisplayName("Žánr")
+				</th>
+				<th>
+					@Html.DisplayName("Distributor")
+				</th>
+				<th>
+					@Html.DisplayName("Výrobce")
+				</th>
+				<th>
+					<span class="glyphicon glyphicon-hdd"></span>
+				</th>
+				<th>
+					<span class="glyphicon glyphicon-user"></span>
+				</th>
+				<th>
+					<span class="glyphicon glyphicon-heart"></span>
+				</th>
+
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						<span class="bold">
+							@Html.ActionLink(item.Name, "Detail", new { id = item.Id })
+						</span>
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Year)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Genre.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Distributors.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Creators.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Device.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.RankCount)x
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.RankOveral)
+					</td>
+				</tr>
+			}
+		</table>
+
+	</div>
+	</div>
+

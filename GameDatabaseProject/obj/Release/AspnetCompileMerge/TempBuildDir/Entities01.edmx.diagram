@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="daaad16dcfd2486cafaf33bfdb5caaed" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Creators" Width="1.5" PointX="6.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Distributors" Width="1.5" PointX="8.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Games" Width="1.5" PointX="8.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Genre" Width="1.5" PointX="11.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Reviews" Width="1.5" PointX="12.875" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.GamesGenre" />
+        <AssociationConnector Association="Model.GamesDistributors" />
+        <AssociationConnector Association="Model.GamesCreators" />
+        <AssociationConnector Association="Model.GamesReviews" />
+        <AssociationConnector Association="Model.ReviewsAspNetUsers" />
+        <EntityTypeShape EntityType="Model.FavouriteReviews" PointX="13.25" PointY="6.875" Width="1.5" />
+        <AssociationConnector Association="Model.FavouriteReviewsReviews" />
+        <AssociationConnector Association="Model.FavouriteReviewsAspNetUsers" />
+        <EntityTypeShape EntityType="Model.Device" Width="1.5" PointX="4.625" PointY="6.375" />
+        <AssociationConnector Association="Model.DeviceGames" />
+        <EntityTypeShape EntityType="Model.Distributos" Width="1.5" PointX="0.75" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

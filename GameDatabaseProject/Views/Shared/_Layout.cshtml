@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pushstart.cz</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+	
+
+
+	@Styles.Render("~/Content/css/bootstrap")
+
+	@Styles.Render("~/Content/css/main_styles")
+
+
+
+	
+
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-2">
+					<div class="logo">
+						<a href='@Url.Action("Index", "User")'>
+							<img src='@Url.Content("~/Content/images/logo3.png")' />
+						</a>
+					</div>
+				</div>
+
+				<div class="col-md-10">
+					<nav class="text-right">
+						<ul class="list-unstyled list-inline">
+							<li>
+								<span class="glyphicon glyphicon-list bold"></span>
+								<a href='@Url.Action("MyReviews", "User")'> Můj Pushstart</a>
+							</li>
+
+							<li>
+								<span class="glyphicon glyphicon-signal"></span>
+								<a href='@Url.Action("AllGames", "User")'> Celý žebříček</a>
+							</li>
+
+							<li>
+								<span class="glyphicon glyphicon-globe"></span>
+								<a href='@Url.Action("GetUsers", "User")'> Uživatelé </a> 
+							</li>
+
+							<li>
+								@Html.Partial("SearchBox")
+							</li>
+
+							<li>
+								@Html.Partial("_LoginPartial")&nbsp;
+							</li>
+						</ul>
+
+
+
+					</nav>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+    
+    <div class="container body-content">
+        @RenderBody()
+       
+		
+    </div>
+
+	<footer>
+		<div class="container-fluid">
+
+
+			@*<div class="col-md-12"> defaul je full viewport i bez col 12*@
+				<div class="footer-style">
+					<p>&copy; @DateTime.Now.Year -  Pushstart.cz | Databáze hráčů XBox One a Playstation 4</p>
+				</div>
+			@*</div>*@
+				
+
+			</div>
+
+	</footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+	
+    @RenderSection("scripts", required: false)
+</body>
+</html>

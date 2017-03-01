@@ -1,0 +1,13 @@
+﻿
+
+
+@using (Html.BeginForm("SearchResult", "User"))
+{
+@Html.TextBox("searchString", "", new { placeholder = "HLEDAT" } )
+
+<button type="submit" name="SearchResult"><span class="glyphicon glyphicon-search"></span></button>
+
+}
+
+
+

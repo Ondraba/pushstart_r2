@@ -1,0 +1,210 @@
+﻿@model GameDatabaseProject.Games
+
+@{
+	ViewBag.Title = "Detail";
+}
+
+
+
+<div class="standard-height">
+	<detail>
+		<div class="container containter-packet">
+
+			<div class="row">
+				<div class="all-details">
+
+
+
+					<div class="col-md-11">
+						<div class="top-wrapper">
+						</div>
+
+					</div>
+
+					<div class="col-md-11">
+
+						<div class="single-detail">
+							<div class="col-md-3">
+								<img src="@Url.Content(Model.Picture)" width="184" height="230" alt="" />
+							</div>
+
+							<div class="col-md-3">
+								<div class="row">
+									<div class="detail-name">
+										@Html.DisplayFor(model => model.Name)
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="detail-year">
+										(@Html.DisplayFor(model => model.Year))
+									</div>
+								</div>
+
+								<div class="row rank-row">
+									<div class="detail-rank">
+										@Html.DisplayFor(model => model.RankOveral)
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="detail-count">
+										@Html.DisplayFor(model => model.RankCount)
+										<span class="glyphicon glyphicon-list-alt"></span>
+									</div>
+								</div>
+
+
+							</div>
+
+
+							<div class="col-md-3">
+
+								<div class="details-2">
+									<div class="row">
+										<div class="detail-genre">
+											<span class="glyphicon glyphicon-inbox"></span>
+											@Html.DisplayFor(model => model.Genre.Name)
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="detail-distributor">
+											@Html.DisplayFor(model => model.Distributors.Name)
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="detail-creator">
+											@Html.DisplayFor(model => model.Creators.Name)
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="detail-device">
+											<span class="glyphicon glyphicon-hdd"></span>
+											@Html.DisplayFor(model => model.Device.Name)
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+
+							<div class="col-md-3">
+
+
+
+								<div class="details-3">
+									<div class="row">
+										<div id="active-ranking-panel">
+											<div class="detail-start-ranking">
+												@Html.ActionLink("Komentovat", "CreateUserReview", new { id = Model.Id })
+												<span class="glyphicon glyphicon-pencil"></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="col-md-2">
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</detail>
+
+
+	<div class="container containter-packet">
+
+
+		@foreach (var review in ViewBag.reviewViewbagList) // neprohledává Project.Reviews ale Model(Games).(cizíklíče)Reviews navázané na cizí klíč - Games.Reviews
+		{
+
+
+
+			<div class="container">
+
+				<div class="review-packet">
+
+					<div class="row">
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="review-edit">
+
+									
+										<div class="review-like">
+
+								
+
+											<a href="@Url.Action("Like", "User", new { id = review.Id })"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+															
+
+											
+
+										</div>
+								
+
+
+
+										<span class="glyphicon glyphicon-heart"></span>
+										<div class="bold review-points">@review.ReviewPoints </div>
+										@*<a href="@Url.Action("EditUserReview", "User", new { id = review.Id })"><span class="glyphicon glyphicon-wrench"></span></a>
+			<a href="@Url.Action("DeleteReview", "User", new { id = review.Id })"><span class="glyphicon glyphicon-remove"></span></a>*@
+
+
+
+									</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-10">
+								<div class="review-content">
+									@review.Content
+								</div>
+							</div>
+
+							<div class="col-md-2">
+
+								<div class="clearfix">
+									<div class="review-rank">
+										@review.UserRank
+									</div>
+								</div>
+
+								<div class="clearfix">
+									<div class="review-name">
+										<a href="@Url.Action("UsersReviews", "User", new { id = review.User_Id })">		@review.User_Name</a>
+</div>
+								</div>
+
+							</div>
+
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+
+	</div>
+
+</div>
+	
+
+
+	

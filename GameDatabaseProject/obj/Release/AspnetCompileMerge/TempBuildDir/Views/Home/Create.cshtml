@@ -1,0 +1,134 @@
+﻿@model GameDatabaseProject.Games
+
+@{
+	ViewBag.Title = "Create";
+}
+
+<div class="standard-height">
+	<div class="create-admin-packet">
+
+		<h2>Administrační rozhraní <span class="bold">Pushstart.cz</span></h2>
+
+
+		@using (Html.BeginForm("Create", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+		{
+			@Html.AntiForgeryToken()
+
+			<div class="form-horizontal">
+				<h4><span class="glyphicon glyphicon-cog"></span>  Nová herní položka</h4>
+				<hr />
+
+
+				@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+				<div class="form-group">
+					@Html.LabelFor(model => model.Name, "Název", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				@*<div class="form-group">
+					@Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">*@
+
+				<div class="form-group">
+					@Html.Label("Obrázek", new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+
+						<input type="file" id="picture" name="uploadPicture" />
+
+					</div>
+
+				</div>
+
+
+				@*<div class="form-group">
+						@Html.Label("Avatar", new { @class = "control-label col-md-2" })
+						<div class="col-md-10">
+							<input type="file" id="Avatar" name="upload" />
+						</div>
+					</div>*@
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Year, "Rok vzniku", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+
+
+				@*(SelectList)ViewBag.CreatorList
+					dropdown list parametr ve formátu listu a viewbagu z homecontrolleru*@
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Genre_Id, "Žánr", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("Genre_Id", (SelectList)ViewBag.GenreList, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Genre_Id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Distributor_Id, "Distributor", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("Distributor_Id", (SelectList)ViewBag.DistributorList, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Distributor_Id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Creator_Id, "Výrobce", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("Creator_Id", (SelectList)ViewBag.CreatorList, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.Creator_Id, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.DeviceId, "Platforma", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.DropDownList("DeviceId", (SelectList)ViewBag.DeviceList, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.DeviceId, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.RankCount, "Počet hodnocení", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.RankCount, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.RankCount, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.RankOveral, "Průměrné hodnocení", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+						@Html.EditorFor(model => model.RankOveral, new { htmlAttributes = new { @class = "form-control" } })
+						@Html.ValidationMessageFor(model => model.RankOveral, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Přidat hru" class="btn btn-default" />
+					</div>
+				</div>
+			</div>
+		}
+
+
+
+		<div>
+			@Html.ActionLink("Zpět na Admin", "Index")
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

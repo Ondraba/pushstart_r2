@@ -1,0 +1,68 @@
+﻿@model IEnumerable<GameDatabaseProject.Games>
+
+<div class="standard-height">
+	<table class="table search-result-packet table-striped">
+
+		<tr>
+
+			<th>
+				@Html.DisplayName("Název hry")
+			</th>
+			<th>
+				@Html.DisplayName("Rok vzniku")
+			</th>
+			<th>
+				@Html.DisplayName("Žánr")
+			</th>
+			<th>
+				@Html.DisplayName("Distributor")
+			</th>
+			<th>
+				@Html.DisplayName("Výrobce")
+			</th>
+			<th>
+				<span class="glyphicon glyphicon-hdd"></span>
+			</th>
+			<th>
+				<span class="glyphicon glyphicon-user"></span>
+			</th>
+			<th>
+				<span class="glyphicon glyphicon-heart"></span>
+			</th>
+
+		</tr>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					<span class="bold">
+						@Html.ActionLink(item.Name, "Detail", new { id = item.Id })
+					</span>
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Year)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Genre.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Distributors.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Creators.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Device.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RankCount)x
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RankOveral)
+				</td>
+			</tr>
+		}
+	</table>
+
+	</div>

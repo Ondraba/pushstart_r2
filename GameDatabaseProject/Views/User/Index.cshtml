@@ -1,0 +1,158 @@
+﻿@model IEnumerable<GameDatabaseProject.Games>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+	<content>
+		<div class="container content">
+
+			<div class="row">
+				<div class="packet">
+
+					@foreach (var item in Model)
+					{
+					
+
+						<div class="col-md-3">
+							<div class="row game-item">
+								<div class="row">
+									<div class="col-md-12">
+										<span class="game-title-text">
+											@Html.ActionLink(item.Name, "Detail", new { id = item.Id })
+										</span>
+									</div>
+								</div>
+
+
+								<div class="row">
+									<div class="col-md-9">
+										<img src="@Url.Content(item.Picture)" />
+									</div>
+
+									<div class="col-md-3">
+										<span class="rank-title-text">
+											@Html.DisplayFor(modelItem => item.RankOveral)%
+										</span>
+
+										<div class="row">
+											<div class="col-md-12">
+												<span class="count-title-text">
+													(@Html.DisplayFor(modelItem => item.RankCount))
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="detail-row-inside">
+											@Html.ActionLink("DETAIL", "Detail", new { id = item.Id })
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+
+
+					}
+
+
+
+
+
+
+					
+
+					
+
+						@foreach (var game in ViewBag.BadGames)
+						{
+
+
+							<div class="col-md-3">
+								<div class="row bad-game-item">
+									<div class="row">
+										<div class="col-md-12">
+											<span class="bad-game-title-text">
+												<a href="@Url.Action("Detail", "User", new { id = game.Id })"> @game.Name</a>
+											</span>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-9">
+											<img src="@Url.Content(game.Picture)" />
+										</div>
+
+										<div class="col-md-3">
+											<span class="rank-title-text">
+												@game.RankOveral%
+											</span>
+
+											<div class="row">
+												<div class="col-md-12">
+													<span class="count-title-text">
+														(@game.RankCount)
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="bad-detail-row-inside">
+
+												<a href="@Url.Action("Detail", "User", new { id = game.Id })"> DETAIL </a>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div>
+
+
+						}
+					
+				</div>
+
+
+
+
+				
+				
+				
+			</div>
+
+
+
+		</div>
+
+
+
+		
+
+	</content>
+
+
+
+
+
+
+
+
+
+
+	
+
+	

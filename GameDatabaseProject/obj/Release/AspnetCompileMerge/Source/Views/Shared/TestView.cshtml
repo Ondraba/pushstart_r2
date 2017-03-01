@@ -1,0 +1,61 @@
+﻿@model GameDatabaseProject.Games
+
+
+@foreach (var review in Model.Reviews) // neprohledává Project.Reviews ale Model(Games).(cizíklíče)Reviews navázané na cizí klíč - Games.Reviews
+{
+
+
+
+	<div class="container">
+
+		<div class="review-packet">
+
+			<div class="row">
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="review-edit">
+
+
+
+							<a href="@Url.Action("Like", "User", new { id = review.Id })"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+							<a href="@Url.Action("EditUserReview", "User", new { id = review.Id })"><span class="glyphicon glyphicon-wrench"></span></a>
+							<a href="@Url.Action("DeleteReview", "User", new { id = review.Id })"><span class="glyphicon glyphicon-remove"></span></a>
+
+
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10">
+						<div class="review-content">
+							@review.Content
+						</div>
+					</div>
+
+					<div class="col-md-2">
+
+						<div class="clearfix">
+							<div class="review-rank">
+								@review.UserRank
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<div class="review-name">
+								@review.User_Name
+							</div>
+						</div>
+
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+}

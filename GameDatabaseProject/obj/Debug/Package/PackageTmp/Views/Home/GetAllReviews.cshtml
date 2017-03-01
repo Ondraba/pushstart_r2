@@ -1,0 +1,79 @@
+﻿@model IEnumerable<GameDatabaseProject.Reviews>
+
+@{
+	ViewBag.Title = "GetAllReviews";
+}
+
+
+<div class="standard-height">
+	<div class="admin-packet">
+
+		<h2>Administrační rozhraní <span class="bold">Pushstart.cz</span></h2>
+
+		<div>
+			<h4><span class="glyphicon glyphicon-signal"></span>  Přehled uživatelských recenzí</h4>
+
+			<p>
+				
+			</p>
+			<table class="table table-reviews">
+				<tr>
+					<th>
+						@Html.DisplayName("Obsah")
+					</th>
+					<th>
+						@Html.DisplayName("Vytvořeno")
+					</th>
+					<th>
+						@Html.DisplayName("Hodnocení")
+					</th>
+					<th>
+						@Html.DisplayName("Uživatel")
+					</th>
+					<th>
+						@Html.DisplayName("Body")
+					</th>
+					<th>
+						@Html.DisplayName("Hra")
+					</th>
+					<th>
+						@Html.DisplayName("Registrace")
+					</th>
+					
+				</tr>
+
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@item.Content.Substring(0, Math.Min(item.Content.Length, 50))
+							@*@Html.DisplayFor(modelItem => item.Content).ToString().Substring(0,2)*@
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Created_At)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.UserRank)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.User_Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.ReviewPoints)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Games.Name)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+						</td>
+						<td>
+							@Html.ActionLink("Smazat", "DeleteReview", new { id = item.Id })
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+	</div>
+</div>

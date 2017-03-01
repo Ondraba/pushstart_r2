@@ -1,0 +1,1 @@
+﻿SELECT User_Id FROM Reviews

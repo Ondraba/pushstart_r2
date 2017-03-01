@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="8217650_pushstart.cz_web" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="8217650_pushstart.cz_web/App_Data" tags="Hidden">
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;C:\Users\datart\Documents\Visual Studio 2015\Projects\GameDatabaseProject\GameDatabaseProject\App_Data\aspnet-GameDatabaseProject-20160209104621.mdf&quot;;Integrated Security=True;Connect Timeout=30" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="Entities-Web.config Connection String" description="" value="metadata=res://*/Entities01.csdl|res://*/Entities01.ssdl|res://*/Entities01.msl;provider=System.Data.SqlClient;provider connection string='metadata=res://*/Entities01.csdl|res://*/Entities01.ssdl|res://*/Entities01.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=(LocalDb)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\aspnet-GameDatabaseProject-20160209104621.mdf;initial catalog=aspnet-GameDatabaseProject-20160209104621;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&amp;quot;&quot; providerName=&quot;System.Data.EntityClient'" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Entities']/@connectionString" />
+  </parameter>
+  <parameter name="GameDatabaseProject.Models.GameDbEntities-Web.config Connection String" description="" value="GameDatabaseProject.Models.GameDbEntities_ConnectionString&quot; providerName=&quot;System.Data.SqlClient" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\datart\\Documents\\Visual\ Studio\ 2015\\Projects\\GameDatabaseProject\\GameDatabaseProject\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GameDatabaseProject.Models.GameDbEntities']/@connectionString" />
+  </parameter>
+</parameters>
