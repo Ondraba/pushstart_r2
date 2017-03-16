@@ -21,5 +21,7 @@ namespace GameDatabaseProject
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             BundleTable.EnableOptimizations = true;
         }
+
     }
+
 }

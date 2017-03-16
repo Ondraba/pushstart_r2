@@ -211,8 +211,10 @@
       <DependentUpon>Entities01.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PublicController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Creators.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
@@ -260,10 +262,15 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ConnDIC.cs" />
+    <Compile Include="Models\DIC.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameDbEntities.cs" />
+    <Compile Include="Models\GameRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IGameRepository.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Moduls\Enviroment.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -621,10 +628,12 @@
     <Content Include="Views\User\UsersReviews.cshtml" />
     <Content Include="Views\User\GetBadGames.cshtml" />
     <Content Include="Views\User\SortAllGames.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\ProfileTransformWebConfig\transformed\Views\" />
     <Folder Include="obj\Debug\TransformWebConfig\transformed\Views\" />
+    <Folder Include="Views\Public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
