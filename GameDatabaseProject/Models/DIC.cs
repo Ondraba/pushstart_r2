@@ -12,15 +12,13 @@ namespace GameDatabaseProject.Models
        private Entities dicContext;
 
         public  DIC(){
-            this.loadConnDic();
-
+            this.loadConnDic();     
         }
 
         private void loadConnDic()
         {
             ConnDIC connDIC = new ConnDIC();
             this.dicContext = connDIC.returnCurrentConnection();
-
         }
 
         Entities getCurrentConnection()
@@ -28,10 +26,30 @@ namespace GameDatabaseProject.Models
             return this.dicContext;
         }
 
+        public IObjectRepository getObjectRepository()
+        {
+            IObjectRepository objectRepository = new ObjectRepository(this.getCurrentConnection());
+            return objectRepository;
+        }
+
+
         public IGameRepository getGameRepository()
         {
             IGameRepository gameRepository = new GameRepository(this.getCurrentConnection());
             return gameRepository;
         }
+
+        public IDeviceRepository getDeviceRepository()
+        {
+            IDeviceRepository deviceRepository = new DeviceRepository(this.getCurrentConnection());
+            return deviceRepository;
+        }
+
+        public IGenreRepository getGenreRepository()
+        {
+            IGenreRepository genreRepository = new GenreRepository(this.getCurrentConnection());
+            return genreRepository;
+        }
+
     }
 }

@@ -13,16 +13,20 @@ namespace GameDatabaseProject.Controllers
     {
     
         private DIC dic;
+        private IGameRepository gameRepository;
+        private IObjectRepository objectRepository;
 
         public AdminController()
         {
             this.dic = new DIC();
+            this.gameRepository = dic.getGameRepository();
+            this.objectRepository = dic.getObjectRepository();
         }
 
         // GET: Admin
         public ActionResult Index()
         {
-            var gameCollection = (from g in dic.getGameRepository().GetGames()
+            var gameCollection = (from g in this.gameRepository.GetGames()
                                  select g).ToList();
             return View(gameCollection);
         }

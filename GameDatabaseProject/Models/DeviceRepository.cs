@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data;
 using GameDatabaseProject.Models;
 using System.Data.Entity;
 
 namespace GameDatabaseProject.Models
 {
-    public class GameRepository : IGameRepository
+    public class DeviceRepository : IDeviceRepository
     {
         private Entities currentDbContext;
+       
 
-        public GameRepository(Entities currentDbContext)
+        public DeviceRepository(Entities currentDbContext)
         {
             this.currentDbContext = currentDbContext;
+            
         }
 
         public Entities getCurrentDbContext()
@@ -22,32 +23,31 @@ namespace GameDatabaseProject.Models
             return this.currentDbContext;
         }
 
-        public IEnumerable<Games> GetGames()
+        public IEnumerable<Device> getDevices()
         {
-            return getCurrentDbContext().Games.ToList();
+            return getCurrentDbContext().Device.ToList();
         }
 
-        public Games getGameById(int id)
+        public void addDevice(Device device)
         {
-            return getCurrentDbContext().Games.Find(id);
+            getCurrentDbContext().Device.Add(device);
         }
 
-        public void addGame(Games game)
+        public Device getDeviceById(int id)
         {
-            getCurrentDbContext().Games.Add(game);
+            return getCurrentDbContext().Device.Find(id);
         }
 
-        public void removeGame(int id)
+        public void removeDevice(int id)
         {
-            Games gameToRemove = currentDbContext.Games.Find(id);
-            getCurrentDbContext().Games.Remove(gameToRemove);
+            Device deviceToremove = getCurrentDbContext().Device.Find(id);
+            getCurrentDbContext().Device.Remove(deviceToremove);
         }
 
-        public void updateGame(Games game)
+        public void updateDevice(Device device)
         {
-            getCurrentDbContext().Entry(game).State = EntityState.Modified;
+            getCurrentDbContext().Entry(device).State = EntityState.Modified;
         }
-
 
         private bool disposed = false;
 
@@ -68,5 +68,8 @@ namespace GameDatabaseProject.Models
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
+
     }
 }

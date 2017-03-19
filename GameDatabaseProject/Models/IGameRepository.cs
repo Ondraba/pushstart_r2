@@ -16,6 +16,5 @@ namespace GameDatabaseProject.Models
         void addGame(Games game);
         void removeGame(int id);
         void updateGame(Games game);
-        void saveGame();
     }
 }
