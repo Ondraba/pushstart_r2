@@ -48,25 +48,5 @@ namespace GameDatabaseProject.Models
             getCurrentDbContext().Entry(game).State = EntityState.Modified;
         }
 
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    getCurrentDbContext().Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }

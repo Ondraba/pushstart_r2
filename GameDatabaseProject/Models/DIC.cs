@@ -17,11 +17,16 @@ namespace GameDatabaseProject.Models
 
         private void loadConnDic()
         {
-            ConnDIC connDIC = new ConnDIC();
+            ConnDIC connDIC = ConnDIC.returnInstance();
             this.dicContext = connDIC.returnCurrentConnection();
         }
 
         Entities getCurrentConnection()
+        {
+            return this.dicContext;
+        }
+
+        public Entities returnCurrentPublicConnection()
         {
             return this.dicContext;
         }

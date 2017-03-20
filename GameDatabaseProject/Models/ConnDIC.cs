@@ -9,10 +9,18 @@ namespace GameDatabaseProject.Models
 {
     public class ConnDIC
     {
+        private static ConnDIC instance = null;
         public Entities returnCurrentConnection()
         {
             Entities currentDbContext = new Entities();
             return currentDbContext;
+        }
+
+        public static ConnDIC returnInstance()
+        {
+            if (instance == null)
+                instance = new ConnDIC();
+            return instance;
         }
     }
 }
