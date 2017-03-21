@@ -21,7 +21,7 @@ namespace GameDatabaseProject.Models
             this.dicContext = connDIC.returnCurrentConnection();
         }
 
-        Entities getCurrentConnection()
+        private Entities getCurrentConnection()
         {
             return this.dicContext;
         }
@@ -53,6 +53,18 @@ namespace GameDatabaseProject.Models
         public IGenreRepository getGenreRepository()
         {
             IGenreRepository genreRepository = new GenreRepository(this.getCurrentConnection());
+            return genreRepository;
+        }
+
+        public IPublicUser getPublicUserRepository()
+        {
+            IPublicUser genreRepository = new UserRepository(this.getCurrentConnection());
+            return genreRepository;
+        }
+
+        public IServerUser getServerUserRepository()
+        {
+            IServerUser genreRepository = new UserRepository(this.getCurrentConnection());
             return genreRepository;
         }
 

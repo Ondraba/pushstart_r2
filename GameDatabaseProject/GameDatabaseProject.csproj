@@ -215,6 +215,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PublicController.cs" />
+    <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Creators.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
@@ -274,9 +275,12 @@
     <Compile Include="Models\IGameRepository.cs" />
     <Compile Include="Models\IGenreRepository.cs" />
     <Compile Include="Models\IObjectRepository.cs" />
+    <Compile Include="Models\IPublicUser.cs" />
+    <Compile Include="Models\IServerUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ObjectRepository.cs" />
     <Compile Include="Models\ServerModel.cs" />
+    <Compile Include="Models\UserRepository.cs" />
     <Compile Include="Moduls\Enviroment.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -637,6 +641,9 @@
     <Content Include="Views\User\SortAllGames.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\CreateGame.cshtml" />
+    <Content Include="Views\Admin\GetAllUsers.cshtml" />
+    <Content Include="Views\Server\GetAllUsers.cshtml" />
+    <Content Include="Views\Admin\GetAllUsersMails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\ProfileTransformWebConfig\transformed\Views\" />

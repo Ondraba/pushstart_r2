@@ -14,10 +14,9 @@ namespace GameDatabaseProject.Models
         public GenreRepository(Entities currentDbContext)
         {
             this.currentDbContext = currentDbContext;
-
         }
 
-        public Entities getCurrentDbContext()
+        private Entities getCurrentDbContext()
         {
             return this.currentDbContext;
         }

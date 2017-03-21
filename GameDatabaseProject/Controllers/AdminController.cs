@@ -18,6 +18,7 @@ namespace GameDatabaseProject.Controllers
         private IObjectRepository objectRepository;
         private IGenreRepository genreRepository;
         private IDeviceRepository deviceRepository;
+        private IPublicUser userRepository;
         private Entities localDbContext;
 
         public AdminController()
@@ -27,6 +28,7 @@ namespace GameDatabaseProject.Controllers
             this.objectRepository = dic.getObjectRepository();
             this.genreRepository = dic.getGenreRepository();
             this.deviceRepository = dic.getDeviceRepository();
+            this.userRepository = dic.getPublicUserRepository();
             this.localDbContext = dic.returnCurrentPublicConnection();
         }
 
@@ -79,6 +81,12 @@ namespace GameDatabaseProject.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GetAllUsers()
+        {
+            var usersCollection = (from u in this.userRepository.GetUsers()
+                                   select u).ToList();
+            return View(usersCollection);
+        }
 
     }
 }

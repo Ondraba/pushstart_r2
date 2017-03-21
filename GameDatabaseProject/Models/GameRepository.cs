@@ -17,7 +17,7 @@ namespace GameDatabaseProject.Models
             this.currentDbContext = currentDbContext;
         }
 
-        public Entities getCurrentDbContext()
+        private Entities getCurrentDbContext()
         {
             return this.currentDbContext;
         }
