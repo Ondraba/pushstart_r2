@@ -20,6 +20,8 @@ namespace GameDatabaseProject.Controllers
         private IServerUser userRepository;
         private Entities localDbContext;
 
+        private ISystemModul systemModul;
+
         public ServerController()
         {
             this.dic = new DIC();
@@ -29,6 +31,7 @@ namespace GameDatabaseProject.Controllers
             this.deviceRepository = dic.getDeviceRepository();
             this.userRepository = dic.getServerUserRepository();
             this.localDbContext = dic.returnCurrentPublicConnection();
+            this.systemModul = dic.getSystemModul();
         }
         // GET: Server
         public ActionResult Index()
@@ -40,5 +43,11 @@ namespace GameDatabaseProject.Controllers
         {
             return View(userRepository.GetUsers());
         }
+
+        public ActionResult CachedEventLog()
+        {
+            return View (this.systemModul.getWorkFlowCache());
+        }
+
     }
 }

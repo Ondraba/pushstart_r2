@@ -12,9 +12,10 @@ namespace GameDatabaseProject.Models
     public interface IGameRepository
     {
         IEnumerable<Games> GetGames();
-        Games getGameById(int id);
+        Games getGameById(int? id);
         void addGame(Games game);
-        void removeGame(int id);
+        void removeGameById(int id);
+        void removeGame(Games game);
         void updateGame(Games game);
     }
 }

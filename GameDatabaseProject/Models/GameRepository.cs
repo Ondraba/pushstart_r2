@@ -27,7 +27,7 @@ namespace GameDatabaseProject.Models
             return getCurrentDbContext().Games.ToList();
         }
 
-        public Games getGameById(int id)
+        public Games getGameById(int? id)
         {
             return getCurrentDbContext().Games.Find(id);
         }
@@ -37,11 +37,17 @@ namespace GameDatabaseProject.Models
             getCurrentDbContext().Games.Add(game);
         }
 
-        public void removeGame(int id)
+        public void removeGameById(int id)
         {
             Games gameToRemove = currentDbContext.Games.Find(id);
             getCurrentDbContext().Games.Remove(gameToRemove);
         }
+
+        public void removeGame(Games game)
+        {
+            getCurrentDbContext().Games.Remove(game);
+        }
+
 
         public void updateGame(Games game)
         {

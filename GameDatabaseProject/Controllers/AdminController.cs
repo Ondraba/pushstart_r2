@@ -7,19 +7,23 @@ using System.Data.Entity;
 using GameDatabaseProject.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using System.Net;
 
 namespace GameDatabaseProject.Controllers
 {
     public class AdminController : Controller
     {
-    
+
         private DIC dic;
+        private IMultimedia multimedia;
         private IGameRepository gameRepository;
         private IObjectRepository objectRepository;
         private IGenreRepository genreRepository;
         private IDeviceRepository deviceRepository;
         private IPublicUser userRepository;
         private Entities localDbContext;
+
+        private ISystemModul systemModul;
 
         public AdminController()
         {
@@ -30,13 +34,15 @@ namespace GameDatabaseProject.Controllers
             this.deviceRepository = dic.getDeviceRepository();
             this.userRepository = dic.getPublicUserRepository();
             this.localDbContext = dic.returnCurrentPublicConnection();
+            this.multimedia = dic.getMultimedia();
+            this.systemModul = dic.getSystemModul();
         }
 
         // GET: Admin
         public ActionResult Index()
         {
             var gameCollection = (from g in this.gameRepository.GetGames()
-                                 select g).ToList();
+                                  select g).ToList();
             return View(gameCollection);
         }
 
@@ -45,7 +51,7 @@ namespace GameDatabaseProject.Controllers
         {
             try
             {
-                ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
+                ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Idpander", "Name");
                 ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
                 ViewBag.PictureDrop = new SelectList(this.localDbContext.Games, "Picture");
                 return View();
@@ -53,6 +59,7 @@ namespace GameDatabaseProject.Controllers
             catch (Exception e)
             {
                 Console.WriteLine("{0} Exception caught.", e);
+                this.systemModul.newWorkFlowEvent(e.ToString());
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
@@ -62,22 +69,22 @@ namespace GameDatabaseProject.Controllers
         [Authorize]
         public ActionResult CreateGame(Games games, HttpPostedFileBase uploadPicture)
         {
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                if (this.multimedia.multimediaContentValid(uploadPicture))
                 {
-                    if (uploadPicture != null && uploadPicture.ContentLength > 0)
-                    {
-                        var pictureName = Path.GetFileName(uploadPicture.FileName);
-                        string filePath = Path.Combine(Server.MapPath("~/upload/images/"), pictureName);
-                        uploadPicture.SaveAs(filePath);
-                        games.Picture = Url.Content("~/upload/images/" + pictureName).ToString();
-                    }
-                    games.RankCount = 0;
-                    games.RankOveral = 0;
-                    games.Distributor_Id = 999;
-                    games.Creator_Id = 999;
-                    this.localDbContext.Games.Add(games);
-                    this.localDbContext.SaveChanges();
+                    var pictureName = Path.GetFileName(uploadPicture.FileName);
+                    string filePath = Path.Combine(Server.MapPath("~/upload/images/"), pictureName);
+                    uploadPicture.SaveAs(filePath);
+                    games.Picture = Url.Content("~/upload/images/" + pictureName).ToString();
                 }
+                games.RankCount = 0;
+                games.RankOveral = 0;
+                games.Distributor_Id = 999;
+                games.Creator_Id = 999;
+                this.localDbContext.Games.Add(games);
+                this.localDbContext.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
@@ -88,5 +95,99 @@ namespace GameDatabaseProject.Controllers
             return View(usersCollection);
         }
 
+
+        public ActionResult EditGame(int? id)
+        {
+            
+                ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
+                ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
+                ViewBag.PictureDrop = new SelectList(this.localDbContext.Games, "PictureEdit");
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var getGameById = this.gameRepository.getGameById(id);
+
+                if (getGameById == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(getGameById);
+          
+           
+        }
+
+        [HttpPost, ActionName("EditGame")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult EditGame(Games game, int id, HttpPostedFileBase uploadPictureEdit)
+        {
+            if (this.multimedia.multimediaContentValid(uploadPictureEdit))
+            {
+                var pictureName = Path.GetFileName(uploadPictureEdit.FileName);
+                string filePath = Path.Combine(Server.MapPath("~/upload/images/"), pictureName);
+                uploadPictureEdit.SaveAs(filePath);
+                game.Picture = Url.Content("~/upload/images/" + pictureName).ToString();
+            }
+            if (uploadPictureEdit == null)
+            {
+                game.Picture = game.Picture;
+            }
+
+            this.gameRepository.updateGame(game);
+            this.objectRepository.save();
+            return RedirectToAction("Index");
+        }
+
+
+        [Authorize]
+        public ActionResult DeleteGame(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var getGameById = this.gameRepository.getGameById(id);
+                if (getGameById == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(getGameById);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
+        }
+
+
+        [HttpPost, ActionName("DeleteGame")]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteGame(int id)
+        {
+            try
+            {
+                this.gameRepository.removeGameById(id);
+                this.objectRepository.save();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+        }
+
+
+
     }
+
+
 }

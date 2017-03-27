@@ -68,5 +68,17 @@ namespace GameDatabaseProject.Models
             return genreRepository;
         }
 
+        public IMultimedia getMultimedia()
+        {
+            IMultimedia multimedia = new Multimedia(this.getCurrentConnection());
+            return multimedia;
+        }
+
+        public ISystemModul getSystemModul()
+        {
+            ISystemModul systemModul = new SystemModul(this.getCurrentConnection());
+            return systemModul;
+        }
+
     }
 }
