@@ -8,9 +8,10 @@ using System.Data.Entity;
 
 namespace GameDatabaseProject.Models
 {
-    public class GameRepository : IGameRepository
+    public class GameRepository : IGameRepository, IPublicGameRepository
     {
         private Entities currentDbContext;
+        private List<Games> proposedGames = new List<Games>();
 
         public GameRepository(Entities currentDbContext)
         {
@@ -35,6 +36,21 @@ namespace GameDatabaseProject.Models
         public void addGame(Games game)
         {
             getCurrentDbContext().Games.Add(game);
+        }
+
+        public void proposeNewGame(Games game)
+        {
+            this.proposedGames.Add(game);
+        }
+
+        public IEnumerable<Games> GetProposedGames()
+        {
+            return proposedGames;
+        }
+
+        public void proposedToConfirmedGamesTransform()
+        {
+
         }
 
         public void removeGameById(int id)

@@ -21,6 +21,7 @@ namespace GameDatabaseProject.Controllers
         private IGenreRepository genreRepository;
         private IDeviceRepository deviceRepository;
         private IPublicUser userRepository;
+        private IPublicGameRepository publicGameRepository;
         private Entities localDbContext;
 
         private ISystemModul systemModul;
@@ -36,6 +37,7 @@ namespace GameDatabaseProject.Controllers
             this.localDbContext = dic.returnCurrentPublicConnection();
             this.multimedia = dic.getMultimedia();
             this.systemModul = dic.getSystemModul();
+            this.publicGameRepository = dic.getPublicGameRepository();
         }
 
         // GET: Admin
@@ -184,6 +186,12 @@ namespace GameDatabaseProject.Controllers
                 return Redirect(Request.UrlReferrer.ToString());
             }
         }
+
+        public ActionResult getAllProposedGames()
+        {
+            return View(gameRepository.GetProposedGames());
+        }
+
 
 
 

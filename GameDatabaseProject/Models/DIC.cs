@@ -44,6 +44,12 @@ namespace GameDatabaseProject.Models
             return gameRepository;
         }
 
+        public IPublicGameRepository getPublicGameRepository()
+        {
+            IPublicGameRepository publicGameRepository = new GameRepository(this.getCurrentConnection());
+            return publicGameRepository;
+        }
+
         public IDeviceRepository getDeviceRepository()
         {
             IDeviceRepository deviceRepository = new DeviceRepository(this.getCurrentConnection());
