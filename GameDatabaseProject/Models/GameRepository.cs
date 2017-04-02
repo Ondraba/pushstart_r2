@@ -11,7 +11,7 @@ namespace GameDatabaseProject.Models
     public class GameRepository : IGameRepository, IPublicGameRepository
     {
         private Entities currentDbContext;
-        private List<Games> proposedGames = new List<Games>();
+      
 
         public GameRepository(Entities currentDbContext)
         {
@@ -38,14 +38,14 @@ namespace GameDatabaseProject.Models
             getCurrentDbContext().Games.Add(game);
         }
 
-        public void proposeNewGame(Games game)
+        public void proposeNewGame(ProposedGames proposedGame)
         {
-            this.proposedGames.Add(game);
+             getCurrentDbContext().ProposedGames.Add(proposedGame);
         }
 
-        public IEnumerable<Games> GetProposedGames()
+        public IEnumerable<ProposedGames> GetProposedGames()
         {
-            return proposedGames;
+            return getCurrentDbContext().ProposedGames.ToList();
         }
 
         public void proposedToConfirmedGamesTransform()

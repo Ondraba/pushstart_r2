@@ -62,6 +62,7 @@
     <Property Name="Points" Type="Int32" />
     <NavigationProperty Name="FavouriteReviews" Relationship="Model.FavouriteReviewsAspNetUsers" FromRole="AspNetUsers" ToRole="FavouriteReviews" />
     <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrustLevel_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Creators">
     <Key>
@@ -98,6 +99,7 @@
     <Property Name="RankOveral" Type="Int32" />
     <Property Name="DeviceId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Device" Relationship="Model.DeviceGames" FromRole="Games" ToRole="Device" />
+    <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>
@@ -213,6 +215,30 @@
       <End Role="Device" EntitySet="Device" />
       <End Role="Games" EntitySet="Games" />
     </AssociationSet>
+    <EntitySet Name="ProposedGames" EntityType="Model.ProposedGames" />
+    <AssociationSet Name="DeviceProposedGames" Association="Model.DeviceProposedGames">
+      <End Role="Device" EntitySet="Device" />
+      <End Role="ProposedGames" EntitySet="ProposedGames" />
+    </AssociationSet>
+    <AssociationSet Name="DistributorsProposedGames" Association="Model.DistributorsProposedGames">
+      <End Role="Distributors" EntitySet="Distributors" />
+      <End Role="ProposedGames" EntitySet="ProposedGames" />
+    </AssociationSet>
+    <AssociationSet Name="CreatorsProposedGames" Association="Model.CreatorsProposedGames">
+      <End Role="Creators" EntitySet="Creators" />
+      <End Role="ProposedGames" EntitySet="ProposedGames" />
+    </AssociationSet>
+    <EntitySet Name="ProposedStates" EntityType="Model.ProposedStates" />
+    <AssociationSet Name="ProposedStatesProposedGames" Association="Model.ProposedStatesProposedGames">
+      <End Role="ProposedStates" EntitySet="ProposedStates" />
+      <End Role="ProposedGames" EntitySet="ProposedGames" />
+    </AssociationSet>
+    <EntitySet Name="UserTrustLevels" EntityType="Model.UserTrustLevels" />
+    <AssociationSet Name="UserTrustLevelsAspNetUsers" Association="Model.UserTrustLevelsAspNetUsers">
+      <End Role="UserTrustLevels" EntitySet="UserTrustLevels" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="Distributos" EntityType="Model.Distributos" />
   </EntityContainer>
   <Association Name="GamesGenre">
     <End Type="Model.Games" Role="Games" Multiplicity="*" />
@@ -328,4 +354,105 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ProposedGames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Genre_Id" Type="Int32" Nullable="false" />
+    <Property Name="Distributor_Id" Type="Int32" Nullable="false" />
+    <Property Name="Creator_Id" Type="Int32" Nullable="false" />
+    <Property Name="RankCount" Type="Int32" />
+    <Property Name="RankOveral" Type="Int32" />
+    <Property Name="DeviceId" Type="Int32" Nullable="false" />
+    <Property Name="State_Id" Type="Int32" Nullable="false" />
+    <Property Name="ProposedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="DeviceProposedGames">
+    <End Type="Model.Device" Role="Device" Multiplicity="1" />
+    <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProposedGames">
+        <PropertyRef Name="DeviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DistributorsProposedGames">
+    <End Type="Model.Distributors" Role="Distributors" Multiplicity="1" />
+    <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distributors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProposedGames">
+        <PropertyRef Name="Distributor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CreatorsProposedGames">
+    <End Type="Model.Creators" Role="Creators" Multiplicity="1" />
+    <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Creators">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProposedGames">
+        <PropertyRef Name="Creator_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProposedStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State_cz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="ProposedStatesProposedGames">
+    <End Type="Model.ProposedStates" Role="ProposedStates" Multiplicity="1" />
+    <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProposedStates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProposedGames">
+        <PropertyRef Name="State_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserTrustLevels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrustLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="System_Id" Type="Int32" Nullable="false" />
+    <Property Name="TrustLevel_cz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="UserTrustLevelsAspNetUsers">
+    <End Type="Model.UserTrustLevels" Role="UserTrustLevels" Multiplicity="1" />
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTrustLevels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="TrustLevel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Distributos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

@@ -234,6 +234,9 @@
     <Compile Include="Distributors.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
     </Compile>
+    <Compile Include="Distributos.cs">
+      <DependentUpon>Entities01.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities01.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -269,6 +272,7 @@
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameDbEntities.cs" />
     <Compile Include="Models\GameRepository.cs" />
+    <Compile Include="Models\GameTransformationEngine.cs" />
     <Compile Include="Models\GenreRepository.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IDeviceRepository.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Models\IGenreRepository.cs" />
     <Compile Include="Models\IMultimedia.cs" />
     <Compile Include="Models\IObjectRepository.cs" />
+    <Compile Include="Models\IPublicGameRepository.cs" />
     <Compile Include="Models\IPublicUser.cs" />
     <Compile Include="Models\IServerUser.cs" />
     <Compile Include="Models\ISystemModul.cs" />
@@ -293,10 +298,19 @@
     <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProposedGames.cs">
+      <DependentUpon>Entities01.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProposedStates.cs">
+      <DependentUpon>Entities01.tt</DependentUpon>
+    </Compile>
     <Compile Include="Reviews.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="UserTrustLevels.cs">
+      <DependentUpon>Entities01.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\images\rr1.jpg" />
@@ -649,11 +663,11 @@
     <Content Include="Views\Admin\GetAllUsersMails.cshtml" />
     <Content Include="Views\Admin\DeleteGame.cshtml" />
     <Content Include="Views\Admin\EditGame.cshtml" />
+    <Content Include="Views\Public\ProposeGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\ProfileTransformWebConfig\transformed\Views\" />
     <Folder Include="obj\Debug\TransformWebConfig\transformed\Views\" />
-    <Folder Include="Views\Public\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

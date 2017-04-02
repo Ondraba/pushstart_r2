@@ -12,14 +12,8 @@ namespace GameDatabaseProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Games
+    public partial class ProposedGames
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Games()
-        {
-            this.Reviews = new HashSet<Reviews>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Picture { get; set; }
@@ -30,13 +24,7 @@ namespace GameDatabaseProject
         public Nullable<int> RankCount { get; set; }
         public Nullable<int> RankOveral { get; set; }
         public int DeviceId { get; set; }
+        public int State_Id { get; set; }
         public string ProposedBy { get; set; }
-    
-        public virtual Genre Genre { get; set; }
-        public virtual Distributors Distributors { get; set; }
-        public virtual Creators Creators { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reviews> Reviews { get; set; }
-        public virtual Device Device { get; set; }
     }
 }

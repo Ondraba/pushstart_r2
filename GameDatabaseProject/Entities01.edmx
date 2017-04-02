@@ -67,6 +67,7 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Points" Type="int" />
           <Property Name="NickName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TrustLevel_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Creators">
           <Key>
@@ -83,6 +84,13 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Distributors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Distributos">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -111,6 +119,7 @@
           <Property Name="RankCount" Type="int" />
           <Property Name="RankOveral" Type="int" />
           <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -118,6 +127,31 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProposedGames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Genre_Id" Type="int" Nullable="false" />
+          <Property Name="Distributor_Id" Type="int" Nullable="false" />
+          <Property Name="Creator_Id" Type="int" Nullable="false" />
+          <Property Name="RankCount" Type="int" />
+          <Property Name="RankOveral" Type="int" />
+          <Property Name="DeviceId" Type="int" Nullable="false" />
+          <Property Name="State_Id" Type="int" Nullable="false" />
+          <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProposedStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="State_cz" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Reviews">
           <Key>
@@ -132,6 +166,15 @@
           <Property Name="User_Name" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="ReviewPoints" Type="int" />
           <Property Name="Temporary" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserTrustLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrustLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="System_Id" Type="int" Nullable="false" />
+          <Property Name="TrustLevel_cz" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -199,10 +242,14 @@
           <EntitySet Name="Creators" EntityType="Self.Creators" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Distributors" EntityType="Self.Distributors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distributos" EntityType="Self.Distributos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FavouriteReviews" EntityType="Self.FavouriteReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProposedGames" EntityType="Self.ProposedGames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProposedStates" EntityType="Self.ProposedStates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTrustLevels" EntityType="Self.UserTrustLevels" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -286,6 +333,7 @@
           <Property Name="Points" Type="Int32" />
           <NavigationProperty Name="FavouriteReviews" Relationship="Model.FavouriteReviewsAspNetUsers" FromRole="AspNetUsers" ToRole="FavouriteReviews" />
           <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrustLevel_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Creators">
           <Key>
@@ -322,6 +370,7 @@
           <Property Name="RankOveral" Type="Int32" />
           <Property Name="DeviceId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Device" Relationship="Model.DeviceGames" FromRole="Games" ToRole="Device" />
+          <Property Name="ProposedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -437,6 +486,30 @@
             <End Role="Device" EntitySet="Device" />
             <End Role="Games" EntitySet="Games" />
           </AssociationSet>
+          <EntitySet Name="ProposedGames" EntityType="Model.ProposedGames" />
+          <AssociationSet Name="DeviceProposedGames" Association="Model.DeviceProposedGames">
+            <End Role="Device" EntitySet="Device" />
+            <End Role="ProposedGames" EntitySet="ProposedGames" />
+          </AssociationSet>
+          <AssociationSet Name="DistributorsProposedGames" Association="Model.DistributorsProposedGames">
+            <End Role="Distributors" EntitySet="Distributors" />
+            <End Role="ProposedGames" EntitySet="ProposedGames" />
+          </AssociationSet>
+          <AssociationSet Name="CreatorsProposedGames" Association="Model.CreatorsProposedGames">
+            <End Role="Creators" EntitySet="Creators" />
+            <End Role="ProposedGames" EntitySet="ProposedGames" />
+          </AssociationSet>
+          <EntitySet Name="ProposedStates" EntityType="Model.ProposedStates" />
+          <AssociationSet Name="ProposedStatesProposedGames" Association="Model.ProposedStatesProposedGames">
+            <End Role="ProposedStates" EntitySet="ProposedStates" />
+            <End Role="ProposedGames" EntitySet="ProposedGames" />
+          </AssociationSet>
+          <EntitySet Name="UserTrustLevels" EntityType="Model.UserTrustLevels" />
+          <AssociationSet Name="UserTrustLevelsAspNetUsers" Association="Model.UserTrustLevelsAspNetUsers">
+            <End Role="UserTrustLevels" EntitySet="UserTrustLevels" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Distributos" EntityType="Model.Distributos" />
         </EntityContainer>
         <Association Name="GamesGenre">
           <End Type="Model.Games" Role="Games" Multiplicity="*" />
@@ -552,6 +625,107 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProposedGames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Genre_Id" Type="Int32" Nullable="false" />
+          <Property Name="Distributor_Id" Type="Int32" Nullable="false" />
+          <Property Name="Creator_Id" Type="Int32" Nullable="false" />
+          <Property Name="RankCount" Type="Int32" />
+          <Property Name="RankOveral" Type="Int32" />
+          <Property Name="DeviceId" Type="Int32" Nullable="false" />
+          <Property Name="State_Id" Type="Int32" Nullable="false" />
+          <Property Name="ProposedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="DeviceProposedGames">
+          <End Type="Model.Device" Role="Device" Multiplicity="1" />
+          <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProposedGames">
+              <PropertyRef Name="DeviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DistributorsProposedGames">
+          <End Type="Model.Distributors" Role="Distributors" Multiplicity="1" />
+          <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distributors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProposedGames">
+              <PropertyRef Name="Distributor_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CreatorsProposedGames">
+          <End Type="Model.Creators" Role="Creators" Multiplicity="1" />
+          <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Creators">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProposedGames">
+              <PropertyRef Name="Creator_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProposedStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State_cz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="ProposedStatesProposedGames">
+          <End Type="Model.ProposedStates" Role="ProposedStates" Multiplicity="1" />
+          <End Type="Model.ProposedGames" Role="ProposedGames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProposedStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProposedGames">
+              <PropertyRef Name="State_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserTrustLevels">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrustLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="System_Id" Type="Int32" Nullable="false" />
+          <Property Name="TrustLevel_cz" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="UserTrustLevelsAspNetUsers">
+          <End Type="Model.UserTrustLevels" Role="UserTrustLevels" Multiplicity="1" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTrustLevels">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="TrustLevel_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Distributos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -598,6 +772,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="TrustLevel_Id" ColumnName="TrustLevel_Id" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -634,6 +809,7 @@
           <EntitySetMapping Name="Games">
             <EntityTypeMapping TypeName="Model.Games">
               <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
                 <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
                 <ScalarProperty Name="RankOveral" ColumnName="RankOveral" />
                 <ScalarProperty Name="RankCount" ColumnName="RankCount" />
@@ -690,6 +866,51 @@
           <EntitySetMapping Name="Device">
             <EntityTypeMapping TypeName="Model.Device">
               <MappingFragment StoreEntitySet="Device">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProposedGames">
+            <EntityTypeMapping TypeName="Model.ProposedGames">
+              <MappingFragment StoreEntitySet="ProposedGames">
+                <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
+                <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+                <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+                <ScalarProperty Name="RankOveral" ColumnName="RankOveral" />
+                <ScalarProperty Name="RankCount" ColumnName="RankCount" />
+                <ScalarProperty Name="Creator_Id" ColumnName="Creator_Id" />
+                <ScalarProperty Name="Distributor_Id" ColumnName="Distributor_Id" />
+                <ScalarProperty Name="Genre_Id" ColumnName="Genre_Id" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProposedStates">
+            <EntityTypeMapping TypeName="Model.ProposedStates">
+              <MappingFragment StoreEntitySet="ProposedStates">
+                <ScalarProperty Name="State_cz" ColumnName="State_cz" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTrustLevels">
+            <EntityTypeMapping TypeName="Model.UserTrustLevels">
+              <MappingFragment StoreEntitySet="UserTrustLevels">
+                <ScalarProperty Name="TrustLevel_cz" ColumnName="TrustLevel_cz" />
+                <ScalarProperty Name="System_Id" ColumnName="System_Id" />
+                <ScalarProperty Name="TrustLevel" ColumnName="TrustLevel" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distributos">
+            <EntityTypeMapping TypeName="Model.Distributos">
+              <MappingFragment StoreEntitySet="Distributos">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

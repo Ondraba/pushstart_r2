@@ -62,6 +62,7 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="Points" Type="int" />
     <Property Name="NickName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TrustLevel_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Creators">
     <Key>
@@ -78,6 +79,13 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Distributors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Distributos">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -106,6 +114,7 @@
     <Property Name="RankCount" Type="int" />
     <Property Name="RankOveral" Type="int" />
     <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>
@@ -113,6 +122,31 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProposedGames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Picture" Type="nvarchar(max)" />
+    <Property Name="Year" Type="int" />
+    <Property Name="Genre_Id" Type="int" Nullable="false" />
+    <Property Name="Distributor_Id" Type="int" Nullable="false" />
+    <Property Name="Creator_Id" Type="int" Nullable="false" />
+    <Property Name="RankCount" Type="int" />
+    <Property Name="RankOveral" Type="int" />
+    <Property Name="DeviceId" Type="int" Nullable="false" />
+    <Property Name="State_Id" Type="int" Nullable="false" />
+    <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProposedStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="50" />
+    <Property Name="State_cz" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Reviews">
     <Key>
@@ -127,6 +161,15 @@
     <Property Name="User_Name" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="ReviewPoints" Type="int" />
     <Property Name="Temporary" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserTrustLevels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrustLevel" Type="nvarchar" MaxLength="50" />
+    <Property Name="System_Id" Type="int" Nullable="false" />
+    <Property Name="TrustLevel_cz" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -194,10 +237,14 @@
     <EntitySet Name="Creators" EntityType="Self.Creators" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Distributors" EntityType="Self.Distributors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Distributos" EntityType="Self.Distributos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FavouriteReviews" EntityType="Self.FavouriteReviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProposedGames" EntityType="Self.ProposedGames" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProposedStates" EntityType="Self.ProposedStates" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTrustLevels" EntityType="Self.UserTrustLevels" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

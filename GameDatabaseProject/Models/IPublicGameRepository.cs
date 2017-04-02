@@ -8,6 +8,7 @@ namespace GameDatabaseProject.Models
 {
     public interface IPublicGameRepository
     {
-        void proposeNewGame(Games game);
+        void proposeNewGame(ProposedGames proposedGame);
+        IEnumerable<Games> GetGames();
     }
 }

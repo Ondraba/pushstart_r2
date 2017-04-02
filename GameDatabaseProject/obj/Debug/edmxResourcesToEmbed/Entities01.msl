@@ -41,6 +41,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUsers">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="TrustLevel_Id" ColumnName="TrustLevel_Id" />
           <ScalarProperty Name="NickName" ColumnName="NickName" />
           <ScalarProperty Name="Points" ColumnName="Points" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -77,6 +78,7 @@
     <EntitySetMapping Name="Games">
       <EntityTypeMapping TypeName="Model.Games">
         <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
           <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
           <ScalarProperty Name="RankOveral" ColumnName="RankOveral" />
           <ScalarProperty Name="RankCount" ColumnName="RankCount" />
@@ -133,6 +135,51 @@
     <EntitySetMapping Name="Device">
       <EntityTypeMapping TypeName="Model.Device">
         <MappingFragment StoreEntitySet="Device">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProposedGames">
+      <EntityTypeMapping TypeName="Model.ProposedGames">
+        <MappingFragment StoreEntitySet="ProposedGames">
+          <ScalarProperty Name="ProposedBy" ColumnName="ProposedBy" />
+          <ScalarProperty Name="State_Id" ColumnName="State_Id" />
+          <ScalarProperty Name="DeviceId" ColumnName="DeviceId" />
+          <ScalarProperty Name="RankOveral" ColumnName="RankOveral" />
+          <ScalarProperty Name="RankCount" ColumnName="RankCount" />
+          <ScalarProperty Name="Creator_Id" ColumnName="Creator_Id" />
+          <ScalarProperty Name="Distributor_Id" ColumnName="Distributor_Id" />
+          <ScalarProperty Name="Genre_Id" ColumnName="Genre_Id" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProposedStates">
+      <EntityTypeMapping TypeName="Model.ProposedStates">
+        <MappingFragment StoreEntitySet="ProposedStates">
+          <ScalarProperty Name="State_cz" ColumnName="State_cz" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTrustLevels">
+      <EntityTypeMapping TypeName="Model.UserTrustLevels">
+        <MappingFragment StoreEntitySet="UserTrustLevels">
+          <ScalarProperty Name="TrustLevel_cz" ColumnName="TrustLevel_cz" />
+          <ScalarProperty Name="System_Id" ColumnName="System_Id" />
+          <ScalarProperty Name="TrustLevel" ColumnName="TrustLevel" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distributos">
+      <EntityTypeMapping TypeName="Model.Distributos">
+        <MappingFragment StoreEntitySet="Distributos">
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

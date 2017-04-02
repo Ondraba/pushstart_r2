@@ -28,6 +28,15 @@
         <AssociationConnector Association="Model.FavouriteReviewsAspNetUsers" />
         <EntityTypeShape EntityType="Model.Device" Width="1.5" PointX="4.625" PointY="6.375" />
         <AssociationConnector Association="Model.DeviceGames" />
+        <EntityTypeShape EntityType="Model.ProposedGames" Width="1.5" PointX="9.25" PointY="9.375" />
+        <AssociationConnector Association="Model.DeviceProposedGames" />
+        <AssociationConnector Association="Model.DistributorsProposedGames" />
+        <AssociationConnector Association="Model.CreatorsProposedGames" />
+        <EntityTypeShape EntityType="Model.ProposedStates" Width="1.5" PointX="6.5" PointY="9.625" />
+        <AssociationConnector Association="Model.ProposedStatesProposedGames" />
+        <EntityTypeShape EntityType="Model.UserTrustLevels" Width="1.5" PointX="0.75" PointY="6.375" />
+        <AssociationConnector Association="Model.UserTrustLevelsAspNetUsers" />
+        <EntityTypeShape EntityType="Model.Distributos" Width="1.5" PointX="3.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

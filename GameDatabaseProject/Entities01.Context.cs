@@ -37,5 +37,9 @@ namespace GameDatabaseProject
         public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<FavouriteReviews> FavouriteReviews { get; set; }
         public virtual DbSet<Device> Device { get; set; }
+        public virtual DbSet<ProposedGames> ProposedGames { get; set; }
+        public virtual DbSet<ProposedStates> ProposedStates { get; set; }
+        public virtual DbSet<UserTrustLevels> UserTrustLevels { get; set; }
+        public virtual DbSet<Distributos> Distributos { get; set; }
     }
 }
