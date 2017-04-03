@@ -192,6 +192,26 @@ namespace GameDatabaseProject.Controllers
             return View(gameRepository.GetProposedGames());
         }
 
+        public ActionResult proposedGameCheckProcess(int? id)
+        {
+            ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
+            ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
+            ViewBag.PictureDrop = new SelectList(this.localDbContext.ProposedGames, "PictureEdit");
+            ViewBag.StateList = new SelectList(this.localDbContext.ProposedStates, "Id", "State_cz");
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var getProposedGameById = this.gameRepository.getProposedGameById(id);
+
+            if (getProposedGameById == null)
+            {
+                return HttpNotFound();
+            }
+            return View(getProposedGameById);
+        }
+
 
 
 

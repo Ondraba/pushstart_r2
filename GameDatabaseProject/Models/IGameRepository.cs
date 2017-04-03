@@ -18,5 +18,8 @@ namespace GameDatabaseProject.Models
         void removeGame(Games game);
         void updateGame(Games game);
         IEnumerable<ProposedGames> GetProposedGames();
+        void removeProposedGameById(int id);
+        void removeProposedGame(ProposedGames proposedGame);
+        ProposedGames getProposedGameById(int? id);
     }
 }

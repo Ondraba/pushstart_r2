@@ -664,6 +664,8 @@
     <Content Include="Views\Admin\DeleteGame.cshtml" />
     <Content Include="Views\Admin\EditGame.cshtml" />
     <Content Include="Views\Public\ProposeGame.cshtml" />
+    <Content Include="Views\Admin\getAllProposedGames.cshtml" />
+    <Content Include="Views\Admin\proposedGameCheckProcess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\ProfileTransformWebConfig\transformed\Views\" />

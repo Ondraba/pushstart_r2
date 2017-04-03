@@ -33,6 +33,11 @@ namespace GameDatabaseProject.Models
             return getCurrentDbContext().Games.Find(id);
         }
 
+        public ProposedGames getProposedGameById(int? id)
+        {
+            return getCurrentDbContext().ProposedGames.Find(id);
+        }
+
         public void addGame(Games game)
         {
             getCurrentDbContext().Games.Add(game);
@@ -48,10 +53,18 @@ namespace GameDatabaseProject.Models
             return getCurrentDbContext().ProposedGames.ToList();
         }
 
-        public void proposedToConfirmedGamesTransform()
-        {
 
+        public void removeProposedGameById(int id)
+        {
+            ProposedGames proposedGameToRemove = currentDbContext.ProposedGames.Find(id);
+            getCurrentDbContext().ProposedGames.Remove(proposedGameToRemove);
         }
+
+        public void removeProposedGame(ProposedGames proposedGame)
+        {
+            getCurrentDbContext().ProposedGames.Remove(proposedGame);
+        }
+
 
         public void removeGameById(int id)
         {
