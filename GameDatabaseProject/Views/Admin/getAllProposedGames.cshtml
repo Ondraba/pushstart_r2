@@ -41,9 +41,9 @@
         <th>
             @Html.DisplayNameFor(model => model.State_Id)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ProposedBy)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -79,11 +79,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.State_Id)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.ProposedBy)
-        </td>
+        </td>*@
         <td>
-            @Html.ActionLink("Edit", "proposedGameCheckProcess", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "gameCheckProcessValidation", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>

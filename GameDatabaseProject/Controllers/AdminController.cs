@@ -14,21 +14,20 @@ namespace GameDatabaseProject.Controllers
     public class AdminController : Controller
     {
 
-        private DIC dic;
+        private AdminAcess dic = new DIC();
         private IMultimedia multimedia;
         private IGameRepository gameRepository;
         private IObjectRepository objectRepository;
         private IGenreRepository genreRepository;
         private IDeviceRepository deviceRepository;
         private IPublicUser userRepository;
-        private IPublicGameRepository publicGameRepository;
         private Entities localDbContext;
+        private IGameTransformationEngine gameTransformationEngine;
 
         private ISystemModul systemModul;
 
         public AdminController()
         {
-            this.dic = new DIC();
             this.gameRepository = dic.getGameRepository();
             this.objectRepository = dic.getObjectRepository();
             this.genreRepository = dic.getGenreRepository();
@@ -37,7 +36,7 @@ namespace GameDatabaseProject.Controllers
             this.localDbContext = dic.returnCurrentPublicConnection();
             this.multimedia = dic.getMultimedia();
             this.systemModul = dic.getSystemModul();
-            this.publicGameRepository = dic.getPublicGameRepository();
+            this.gameTransformationEngine = dic.getTransformationEngine();
         }
 
         // GET: Admin
@@ -192,11 +191,11 @@ namespace GameDatabaseProject.Controllers
             return View(gameRepository.GetProposedGames());
         }
 
-        public ActionResult proposedGameCheckProcess(int? id)
+        public ActionResult gameCheckProcessValidation(int? id)
         {
             ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
             ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
-            ViewBag.PictureDrop = new SelectList(this.localDbContext.ProposedGames, "PictureEdit");
+            ViewBag.PictureDrop = new SelectList(this.localDbContext.Games, "PictureEdit");
             ViewBag.StateList = new SelectList(this.localDbContext.ProposedStates, "Id", "State_cz");
 
             if (id == null)
@@ -212,6 +211,30 @@ namespace GameDatabaseProject.Controllers
             return View(getProposedGameById);
         }
 
+        [HttpPost, ActionName("gameCheckProcessValidation")]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult gameCheckProcessValidation(ProposedGames proposedGame, int id, HttpPostedFileBase uploadPictureEdit)
+        {
+            if (this.multimedia.multimediaContentValid(uploadPictureEdit))
+            {
+                var pictureName = Path.GetFileName(uploadPictureEdit.FileName);
+                string filePath = Path.Combine(Server.MapPath("~/upload/images/"), pictureName);
+                uploadPictureEdit.SaveAs(filePath);
+                proposedGame.Picture = Url.Content("~/upload/images/" + pictureName).ToString();
+            }
+            if (uploadPictureEdit == null)
+            {
+                proposedGame.Picture = proposedGame.Picture;
+            }
+
+            proposedGame.ProposedBy = proposedGame.ProposedBy;
+
+            this.gameRepository.updateProposedGame(proposedGame);
+            //this.gameTransformationEngine.gameSecuriteStateCheck(proposedGame);
+            this.objectRepository.save();
+            return RedirectToAction("Index");
+        }
 
 
 

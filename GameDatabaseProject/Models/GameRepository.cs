@@ -82,6 +82,11 @@ namespace GameDatabaseProject.Models
         {
             getCurrentDbContext().Entry(game).State = EntityState.Modified;
         }
+    
+        public void updateProposedGame(ProposedGames proposedGame)
+        {
+            getCurrentDbContext().Entry(proposedGame).State = EntityState.Modified;
+        }
 
     }
 }

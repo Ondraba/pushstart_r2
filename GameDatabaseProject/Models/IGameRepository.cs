@@ -21,5 +21,6 @@ namespace GameDatabaseProject.Models
         void removeProposedGameById(int id);
         void removeProposedGame(ProposedGames proposedGame);
         ProposedGames getProposedGameById(int? id);
+        void updateProposedGame(ProposedGames proposedGame);
     }
 }

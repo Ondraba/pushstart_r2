@@ -266,6 +266,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminAcess.cs" />
     <Compile Include="Models\ConnDIC.cs" />
     <Compile Include="Models\DeviceRepository.cs" />
     <Compile Include="Models\DIC.cs" />
@@ -284,9 +285,11 @@
     <Compile Include="Models\IPublicUser.cs" />
     <Compile Include="Models\IServerUser.cs" />
     <Compile Include="Models\ISystemModul.cs" />
+    <Compile Include="Models\IGameTransformationEngine.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Multimedia.cs" />
     <Compile Include="Models\ObjectRepository.cs" />
+    <Compile Include="Models\PublicAcess.cs" />
     <Compile Include="Models\ServerModel.cs" />
     <Compile Include="Models\SystemModul.cs" />
     <Compile Include="Models\UserRepository.cs" />
@@ -666,6 +669,7 @@
     <Content Include="Views\Public\ProposeGame.cshtml" />
     <Content Include="Views\Admin\getAllProposedGames.cshtml" />
     <Content Include="Views\Admin\proposedGameCheckProcess.cshtml" />
+    <Content Include="Views\Admin\gameCheckProcessValidation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\ProfileTransformWebConfig\transformed\Views\" />

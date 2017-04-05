@@ -7,7 +7,7 @@ using System.Data.Entity;
 
 namespace GameDatabaseProject.Models
 {
-    public class DIC
+    public class DIC : AdminAcess, PublicAcess
     {
        private Entities dicContext;
 
@@ -84,6 +84,12 @@ namespace GameDatabaseProject.Models
         {
             ISystemModul systemModul = new SystemModul(this.getCurrentConnection());
             return systemModul;
+        }
+
+        public IGameTransformationEngine getTransformationEngine()
+        {
+            IGameTransformationEngine gameTransformationEngine = new GameTransformationEngine(this.getCurrentConnection());
+            return gameTransformationEngine;
         }
 
     }

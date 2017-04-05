@@ -13,27 +13,19 @@ namespace GameDatabaseProject.Controllers
 {
     public class PublicController : Controller
     {
-        private DIC dic;
+        private PublicAcess dic = new DIC();
         private IMultimedia multimedia;
         private IPublicGameRepository gameRepository;
         private IObjectRepository objectRepository;
-        private IGenreRepository genreRepository;
-        private IDeviceRepository deviceRepository;
-        private IPublicUser userRepository;
         private Entities localDbContext;
-
         private ISystemModul systemModul;
 
         public PublicController()
         {
-            this.dic = new DIC();
             this.gameRepository = dic.getPublicGameRepository();
             this.objectRepository = dic.getObjectRepository();
-            this.genreRepository = dic.getGenreRepository();
-            this.deviceRepository = dic.getDeviceRepository();
-            this.userRepository = dic.getPublicUserRepository();
-            this.localDbContext = dic.returnCurrentPublicConnection();
             this.multimedia = dic.getMultimedia();
+            this.localDbContext = dic.returnCurrentPublicConnection();
             this.systemModul = dic.getSystemModul();
         }
 
@@ -85,7 +77,7 @@ namespace GameDatabaseProject.Controllers
                 proposedGame.ProposedBy = User.Identity.GetUserId();
 
                 this.gameRepository.proposeNewGame(proposedGame);
-                this.localDbContext.SaveChanges();
+                this.objectRepository.save();
             }
             return RedirectToAction("Index");
         }

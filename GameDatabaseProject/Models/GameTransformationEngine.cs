@@ -7,12 +7,12 @@ using System.Data.Entity;
 
 namespace GameDatabaseProject.Models
 {
-    public class GameTransformationEngine
+    public class GameTransformationEngine : IGameTransformationEngine
     {
         private Entities currentDbContext;
         private DIC dic;
 
-        public  GameTransformationEngine(Entities currentDbContext)
+        public GameTransformationEngine(Entities currentDbContext)
         {
             this.currentDbContext = currentDbContext;
             this.dic = new DIC();
