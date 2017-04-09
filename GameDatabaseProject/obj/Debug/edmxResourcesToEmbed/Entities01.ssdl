@@ -138,7 +138,7 @@
     <Property Name="RankOveral" Type="int" />
     <Property Name="DeviceId" Type="int" Nullable="false" />
     <Property Name="State_Id" Type="int" Nullable="false" />
-    <Property Name="ProposedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProposedBy" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
   <EntityType Name="ProposedStates">
     <Key>

@@ -5,7 +5,9 @@
 }
 
 <h2>ProposeGame</h2>
-
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+	Button
+</button>
 @using (Html.BeginForm("ProposeGame", "Public", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 	@Html.AntiForgeryToken()

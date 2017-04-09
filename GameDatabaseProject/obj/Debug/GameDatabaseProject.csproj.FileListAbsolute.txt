@@ -18,3 +18,4 @@ c:\users\datart\documents\visual studio 2015\Projects\GameDatabaseProject\GameDa
 c:\users\datart\documents\visual studio 2015\Projects\GameDatabaseProject\GameDatabaseProject\obj\Debug\GameDatabaseProject.csprojResolveAssemblyReference.cache
 c:\users\datart\documents\visual studio 2015\Projects\GameDatabaseProject\GameDatabaseProject\obj\Debug\GameDatabaseProject.dll
 c:\users\datart\documents\visual studio 2015\Projects\GameDatabaseProject\GameDatabaseProject\obj\Debug\GameDatabaseProject.pdb
+C:\Users\datart\Documents\Visual Studio 2015\Projects\GameDatabaseProject\GameDatabaseProject\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

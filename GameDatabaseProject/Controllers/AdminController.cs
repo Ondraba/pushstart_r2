@@ -228,11 +228,8 @@ namespace GameDatabaseProject.Controllers
                 proposedGame.Picture = proposedGame.Picture;
             }
 
-            proposedGame.ProposedBy = proposedGame.ProposedBy;
-
             this.gameRepository.updateProposedGame(proposedGame);
-            //this.gameTransformationEngine.gameSecuriteStateCheck(proposedGame);
-            this.objectRepository.save();
+            this.gameTransformationEngine.gameSecuriteStateCheck(proposedGame);
             return RedirectToAction("Index");
         }
 

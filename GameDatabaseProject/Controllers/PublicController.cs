@@ -74,7 +74,7 @@ namespace GameDatabaseProject.Controllers
                 proposedGame.Distributor_Id = 999;
                 proposedGame.Creator_Id = 999;
                 proposedGame.State_Id = 1;
-                proposedGame.ProposedBy = User.Identity.GetUserId();
+                proposedGame.ProposedBy = User.Identity.GetUserName();
 
                 this.gameRepository.proposeNewGame(proposedGame);
                 this.objectRepository.save();

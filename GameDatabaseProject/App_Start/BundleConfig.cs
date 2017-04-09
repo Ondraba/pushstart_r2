@@ -33,7 +33,10 @@ namespace GameDatabaseProject
 
 
             bundles.Add(new StyleBundle("~/Content/css/main_styles").Include(
-                      "~/Content/css/main_styles.css")); 
+                      "~/Content/css/main_styles.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/materialcss").Include(
+                      "~/Content/css/materialcss.css"));
         }
     }
 }

@@ -369,7 +369,7 @@
     <Property Name="RankOveral" Type="Int32" />
     <Property Name="DeviceId" Type="Int32" Nullable="false" />
     <Property Name="State_Id" Type="Int32" Nullable="false" />
-    <Property Name="ProposedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProposedBy" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="DeviceProposedGames">
     <End Type="Model.Device" Role="Device" Multiplicity="1" />
