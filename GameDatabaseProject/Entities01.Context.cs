@@ -40,6 +40,6 @@ namespace GameDatabaseProject
         public virtual DbSet<ProposedGames> ProposedGames { get; set; }
         public virtual DbSet<ProposedStates> ProposedStates { get; set; }
         public virtual DbSet<UserTrustLevels> UserTrustLevels { get; set; }
-        public virtual DbSet<Distributos> Distributos { get; set; }
+        public virtual DbSet<ExperienceSystem> ExperienceSystem { get; set; }
     }
 }

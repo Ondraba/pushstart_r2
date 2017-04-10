@@ -14,5 +14,6 @@ namespace GameDatabaseProject.Models
         AspNetUsers geUserById(string id);
         void removeUser(string id);
         int getOnlineUsersCount();
+        AspNetUsers getCurrentActiveUser(string userId);
     }
 }

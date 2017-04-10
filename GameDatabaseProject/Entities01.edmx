@@ -68,6 +68,7 @@
           <Property Name="Points" Type="int" />
           <Property Name="NickName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TrustLevel_Id" Type="int" Nullable="false" />
+          <Property Name="ExperienceSystem_Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Creators">
           <Key>
@@ -90,12 +91,16 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Distributos">
+        <EntityType Name="ExperienceSystem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="System_Id" Type="int" Nullable="false" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_cz" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="XPPointCount" Type="int" Nullable="false" />
+          <Property Name="QualityCurve" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FavouriteReviews">
           <Key>
@@ -242,7 +247,7 @@
           <EntitySet Name="Creators" EntityType="Self.Creators" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Device" EntityType="Self.Device" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Distributors" EntityType="Self.Distributors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Distributos" EntityType="Self.Distributos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExperienceSystem" EntityType="Self.ExperienceSystem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FavouriteReviews" EntityType="Self.FavouriteReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
@@ -334,6 +339,7 @@
           <NavigationProperty Name="FavouriteReviews" Relationship="Model.FavouriteReviewsAspNetUsers" FromRole="AspNetUsers" ToRole="FavouriteReviews" />
           <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TrustLevel_Id" Type="Int32" Nullable="false" />
+          <Property Name="ExperienceSystem_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Creators">
           <Key>
@@ -509,7 +515,11 @@
             <End Role="UserTrustLevels" EntitySet="UserTrustLevels" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="Distributos" EntityType="Model.Distributos" />
+          <EntitySet Name="ExperienceSystem" EntityType="Model.ExperienceSystem" />
+          <AssociationSet Name="ExperienceSystemAspNetUsers" Association="Model.ExperienceSystemAspNetUsers">
+            <End Role="ExperienceSystem" EntitySet="ExperienceSystem" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="GamesGenre">
           <End Type="Model.Games" Role="Games" Multiplicity="*" />
@@ -719,13 +729,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Distributos">
+        <EntityType Name="ExperienceSystem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="System_Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_cz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="XPPointCount" Type="Int32" Nullable="false" />
+          <Property Name="QualityCurve" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="ExperienceSystemAspNetUsers">
+          <End Type="Model.ExperienceSystem" Role="ExperienceSystem" Multiplicity="1" />
+          <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExperienceSystem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="ExperienceSystem_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -772,6 +798,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="Model.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="ExperienceSystem_Id" ColumnName="ExperienceSystem_Id" />
                 <ScalarProperty Name="TrustLevel_Id" ColumnName="TrustLevel_Id" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
@@ -908,10 +935,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Distributos">
-            <EntityTypeMapping TypeName="Model.Distributos">
-              <MappingFragment StoreEntitySet="Distributos">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="ExperienceSystem">
+            <EntityTypeMapping TypeName="Model.ExperienceSystem">
+              <MappingFragment StoreEntitySet="ExperienceSystem">
+                <ScalarProperty Name="QualityCurve" ColumnName="QualityCurve" />
+                <ScalarProperty Name="XPPointCount" ColumnName="XPPointCount" />
+                <ScalarProperty Name="Name_cz" ColumnName="Name_cz" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+                <ScalarProperty Name="System_Id" ColumnName="System_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

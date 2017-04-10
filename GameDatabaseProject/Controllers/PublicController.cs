@@ -19,6 +19,7 @@ namespace GameDatabaseProject.Controllers
         private IObjectRepository objectRepository;
         private Entities localDbContext;
         private ISystemModul systemModul;
+        private IPublicUser publicUser;
 
         public PublicController()
         {
@@ -27,6 +28,7 @@ namespace GameDatabaseProject.Controllers
             this.multimedia = dic.getMultimedia();
             this.localDbContext = dic.returnCurrentPublicConnection();
             this.systemModul = dic.getSystemModul();
+            this.publicUser = dic.getPublicUserRepository();
         }
 
         // GET: Public
@@ -37,22 +39,32 @@ namespace GameDatabaseProject.Controllers
             return View(gameCollection);
         }
 
-        public ActionResult ProposeGame()
+        public ActionResult ProposeGame(int trustLevel = 2)
         {
-            try
-            {
-                ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
-                ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
-                ViewBag.PictureDrop = new SelectList(this.localDbContext.Games, "Picture");
-                ViewBag.StateList = new SelectList(this.localDbContext.ProposedStates, "Id", "Name");
-                return View();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("{0} Exception caught.", e);
-                this.systemModul.newWorkFlowEvent(e.ToString());
-                return Redirect(Request.UrlReferrer.ToString());
-            }
+                try
+                {
+                var ui = this.publicUser.getCurrentActiveUser(User.Identity.GetUserId()).TrustLevel_Id;
+                    if (this.publicUser.getCurrentActiveUser(User.Identity.GetUserId()).TrustLevel_Id >= trustLevel)
+                    {
+                        ViewBag.GenreList = new SelectList(this.localDbContext.Genre, "Id", "Name");
+                        ViewBag.DeviceList = new SelectList(this.localDbContext.Device, "Id", "Name");
+                        ViewBag.PictureDrop = new SelectList(this.localDbContext.Games, "Picture");
+                        ViewBag.StateList = new SelectList(this.localDbContext.ProposedStates, "Id", "Name");
+                        return View();
+                     }
+                    else
+                    {
+                    this.systemModul.newWorkFlowEvent("Proposed game failed.");
+                    Console.WriteLine("{0} Proposed game failed.");
+                    return RedirectToAction("Index");
+                }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                    this.systemModul.newWorkFlowEvent(e.ToString());
+                    return Redirect(Request.UrlReferrer.ToString());
+                }
         }
 
         [HttpPost]

@@ -41,6 +41,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="Model.AspNetUsers">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="ExperienceSystem_Id" ColumnName="ExperienceSystem_Id" />
           <ScalarProperty Name="TrustLevel_Id" ColumnName="TrustLevel_Id" />
           <ScalarProperty Name="NickName" ColumnName="NickName" />
           <ScalarProperty Name="Points" ColumnName="Points" />
@@ -177,10 +178,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Distributos">
-      <EntityTypeMapping TypeName="Model.Distributos">
-        <MappingFragment StoreEntitySet="Distributos">
-          <ScalarProperty Name="Name" ColumnName="Name" />
+    <EntitySetMapping Name="ExperienceSystem">
+      <EntityTypeMapping TypeName="Model.ExperienceSystem">
+        <MappingFragment StoreEntitySet="ExperienceSystem">
+          <ScalarProperty Name="QualityCurve" ColumnName="QualityCurve" />
+          <ScalarProperty Name="XPPointCount" ColumnName="XPPointCount" />
+          <ScalarProperty Name="Name_cz" ColumnName="Name_cz" />
+          <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+          <ScalarProperty Name="System_Id" ColumnName="System_Id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

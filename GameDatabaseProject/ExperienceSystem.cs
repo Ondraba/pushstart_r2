@@ -12,9 +12,13 @@ namespace GameDatabaseProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Distributos
+    public partial class ExperienceSystem
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public int System_Id { get; set; }
+        public string Name_en { get; set; }
+        public string Name_cz { get; set; }
+        public int XPPointCount { get; set; }
+        public int QualityCurve { get; set; }
     }
 }

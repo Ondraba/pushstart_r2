@@ -18,5 +18,6 @@ namespace GameDatabaseProject.Models
         IPublicGameRepository getPublicGameRepository();
         Entities returnCurrentPublicConnection();
         ISystemModul getSystemModul();
+        IPublicUser getPublicUserRepository();
     }
 }

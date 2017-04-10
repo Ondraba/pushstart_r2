@@ -63,6 +63,7 @@
     <NavigationProperty Name="FavouriteReviews" Relationship="Model.FavouriteReviewsAspNetUsers" FromRole="AspNetUsers" ToRole="FavouriteReviews" />
     <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TrustLevel_Id" Type="Int32" Nullable="false" />
+    <Property Name="ExperienceSystem_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Creators">
     <Key>
@@ -238,7 +239,11 @@
       <End Role="UserTrustLevels" EntitySet="UserTrustLevels" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <EntitySet Name="Distributos" EntityType="Model.Distributos" />
+    <EntitySet Name="ExperienceSystem" EntityType="Model.ExperienceSystem" />
+    <AssociationSet Name="ExperienceSystemAspNetUsers" Association="Model.ExperienceSystemAspNetUsers">
+      <End Role="ExperienceSystem" EntitySet="ExperienceSystem" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="GamesGenre">
     <End Type="Model.Games" Role="Games" Multiplicity="*" />
@@ -448,11 +453,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Distributos">
+  <EntityType Name="ExperienceSystem">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="System_Id" Type="Int32" Nullable="false" />
+    <Property Name="Name_en" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name_cz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="XPPointCount" Type="Int32" Nullable="false" />
+    <Property Name="QualityCurve" Type="Int32" Nullable="false" />
   </EntityType>
+  <Association Name="ExperienceSystemAspNetUsers">
+    <End Type="Model.ExperienceSystem" Role="ExperienceSystem" Multiplicity="1" />
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExperienceSystem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="ExperienceSystem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -246,9 +246,6 @@
     <Compile Include="Distributors.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
     </Compile>
-    <Compile Include="Distributos.cs">
-      <DependentUpon>Entities01.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities01.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -264,6 +261,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Entities01.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ExperienceSystem.cs">
+      <DependentUpon>Entities01.tt</DependentUpon>
+    </Compile>
     <Compile Include="FavouriteReviews.cs">
       <DependentUpon>Entities01.tt</DependentUpon>
     </Compile>
@@ -277,6 +277,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ServerModul\Core\AuthorityModul.cs" />
     <Compile Include="Models\ServerModul\Core\SearchEngine.cs" />
     <Compile Include="Models\SystemModul\Core\AccountViewModels.cs" />
     <Compile Include="Models\SystemModul\Out\AdminAcess.cs" />

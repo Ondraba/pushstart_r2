@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using GameDatabaseProject.Models;
+using System.Web.Mvc;
 using System.Data.Entity;
-using System.Web.Security;
+using GameDatabaseProject.Models;
+using System.IO; //pimage paths, pictures
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using System.Net; //httpstatus cody
 
 namespace GameDatabaseProject.Models
 {
@@ -55,5 +60,10 @@ namespace GameDatabaseProject.Models
                                    select m.Email).ToList();
                 return usersMailList;
             }
-        }
+
+            public AspNetUsers getCurrentActiveUser(string userId)
+            {
+                 return geUserById(userId);
+            }
+    }
     }

@@ -36,7 +36,8 @@
         <AssociationConnector Association="Model.ProposedStatesProposedGames" />
         <EntityTypeShape EntityType="Model.UserTrustLevels" Width="1.5" PointX="0.75" PointY="6.375" />
         <AssociationConnector Association="Model.UserTrustLevelsAspNetUsers" />
-        <EntityTypeShape EntityType="Model.Distributos" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.ExperienceSystem" Width="1.5" PointX="0.75" PointY="8.375" />
+        <AssociationConnector Association="Model.ExperienceSystemAspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
